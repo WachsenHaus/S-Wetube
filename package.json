@@ -10,5 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WachsenHaus/S-Wetube.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WachsenHaus/S-Wetube/issues"
+  },
+  "homepage": "https://github.com/WachsenHaus/S-Wetube#readme",
+  "scripts": {
+    "start": "node index.js"
   }
 }
