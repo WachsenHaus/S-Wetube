@@ -31,11 +31,22 @@ export const postJoin = async (req, res, next) => {
 export const getLogin = (req, res) => {
   res.render("login", { pageTitle: "Log In" });
 };
+
 export const postLogin = passport.authenticate("local", {
-  failureRedirect: routes.login,
+  failureRedirect: routes.login, //failureRedirect 이 변수명은 passport js에서 정의함. // 실패시 이동할 페이지
   successRedirect: routes.home
 });
+
+export const githubLogin = passport.authenticate("github");
+export const githubLoginCallback = (accessToken, refreshToken, profile, cb) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+export const postGithubLogin = (req, res) => {
+  res.send(routse.home);
+};
+
 export const logout = (req, res) => {
+  req.logout();
   res.redirect(routes.home);
 };
 

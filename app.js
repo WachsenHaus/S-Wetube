@@ -12,7 +12,7 @@ import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 import "./passport";
 import session from "express-session";
-import mongoose from "mongoose";
+import mongoose from "mongoose"; //db와 연결을 해준다.
 import MongoStore from "connect-mongo";
 
 const app = express();
@@ -28,14 +28,16 @@ app.use(bodyParser.json()); //사용자가 웹사이트로 전달하는 정보�
 //아바타의 사진이나 비디오를 업로드할때 제목이나 댓글 같은 정보를 전달할때 폼에 담아서 업로드해야함.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common")); //앱에서 발생하는 모든일을 로깅한다.
+
 app.use(
   session({
-    secret: process.env.COOKIE_SECRET,
+    secret: process.env.COOKIE_SECRET, //쿠키 정보를 암호화시켜주낟. 꼭 필요한 정보임.
     resave: true,
     saveUninitialized: false,
     store: new CokieStore({ mongooseConnection: mongoose.connection })
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
