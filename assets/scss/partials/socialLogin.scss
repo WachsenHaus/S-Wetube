@@ -17,12 +17,14 @@
       font-size: 20px;
     }
   }
-  .social-login--github {
-    background-color: $black;
+  //social-login__github
+  //.social-login--github
+  .social-login__github {
+    background-color: #010203;
     color: white;
   }
-  .social-login--facebook {
-    background-color: #3a5998;
-    color: white;
-  }
+  // .social-login--facebook {
+  //   background-color: #3a5998;
+  //   color: white;
+  // }
 }
