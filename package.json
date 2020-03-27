@@ -6,11 +6,14 @@
   "author": "Younghoon CHOI",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/node": "^7.8.4",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.8.4",
     "autoprefixer": "^9.7.4",
+    "aws-sdk": "^2.647.0",
+    "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
@@ -21,10 +24,12 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "get-blob-duration": "^1.1.0",
     "helmet": "^3.21.2",
     "mongoose": "^5.9.2",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "node-sass": "^4.13.1",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
@@ -38,10 +43,14 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore 'scss' ",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "WEBPACK_ENV=production webpack"
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build"
   },
   "repository": {
     "type": "git",
