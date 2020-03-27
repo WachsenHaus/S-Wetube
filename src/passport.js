@@ -12,7 +12,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.gitHubCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `https://guarded-spire-96872.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:4000${routes.githubCallback}`
     },
     githubLoginCallback
   )
