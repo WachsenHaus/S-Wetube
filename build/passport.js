@@ -19,7 +19,7 @@ _passport["default"].use(_User["default"].createStrategy()); //숏컷으로  인
 _passport["default"].use(new _passportGithub["default"]({
   clientID: process.env.GH_ID,
   clientSecret: process.env.GH_SECRET,
-  callbackURL: "http://localhost:4000".concat(_routes["default"].gitHubCallback)
+  callbackURL: process.env.PRODUCTION ? "https://guarded-spire-96872.herokuapp.com".concat(_routes["default"].githubCallback) : "http://localhost:4000".concat(_routes["default"].githubCallback)
 }, _userController.githubLoginCallback));
 
 _passport["default"].serializeUser(_User["default"].serializeUser()); //어떤정보를 쿠키에게 주느냐. //웹에서 유저에대해 어떤정보를 가질수 있느냐.
